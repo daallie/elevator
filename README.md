@@ -10,6 +10,8 @@
 Program Constants: Single floor travel time: 10
 
 ## How to run
+via command line from this directory
+`java -cp ./src/main/java/elevator Elevator start=12 floor=2,9,1,32`
 
 
 ### assumptions

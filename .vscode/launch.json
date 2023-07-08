@@ -9,7 +9,7 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": "start=12 floors=12,13,14,16"
+            "args": "start=12 floors=1,2,3"
         },
         {
             "type": "java",

@@ -35,7 +35,7 @@ public class Elevator {
         List<Integer> floorsToVisit = Arrays.stream(getListOfFloors(floorStr)).boxed().collect(Collectors.toList());
         List<Integer> floorsVisited = Arrays.stream(new int[]{startFloor}).boxed().collect(Collectors.toList());
 
-        int startIndex = 0;
+        int startIndex = floorsToVisit.size()-1;
         // get startIndex
         for (int i = 0; i < floorsToVisit.size(); i++) {
             if(floorsToVisit.get(i) == startFloor) {
