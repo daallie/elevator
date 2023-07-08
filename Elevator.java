@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class Elevator {
     private static final String STARTCMD = "start=";
     private static final String FLOORSCMD = "floors=";
+    private static final int TRAVELTIME = 10;
 
     public static void main(String[] args) {
         if (args.length != 2 || 
@@ -45,8 +46,16 @@ public class Elevator {
             }
         }
         int shortestPath = calculateShortestPath(startIndex, startFloor, floorsToVisit, floorsVisited);
-        System.out.println(shortestPath);
-        System.out.println(floorsVisited.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(shortestPath*TRAVELTIME);
+        sb.append(" ");
+        for (int i = 0; i < floorsVisited.size(); i++) {
+            if (i != 0) {
+                sb.append(",");
+            }
+            sb.append(floorsVisited.get(i));
+        }
+        System.out.println(sb.toString());
     }
 
     public static int calculateShortestPath(int currentIndex, int currentFloor, List<Integer> floorsToVisit, List<Integer> floorsVisited) {
