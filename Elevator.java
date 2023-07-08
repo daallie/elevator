@@ -19,7 +19,7 @@ public class Elevator {
         // get start value
         String startStr = args[0].substring(STARTCMD.length());
         if (!validateFloor(startStr)) {
-            System.out.println("INVALID start floor provided, please provide an integer greater than 0");
+            System.out.println("INVALID start floor provided, please provide an integer");
             System.exit(0);
         }
         int startFloor = Integer.parseInt(startStr);
@@ -27,7 +27,7 @@ public class Elevator {
         // get the list of floors
         String floorStr = args[1].substring(FLOORSCMD.length());
         if (!validateListOfFloors(floorStr)) {
-            System.out.println("INVALID list of floors provided, please provide an integer greater than 0, in comma seperated list");
+            System.out.println("INVALID list of floors provided, please provide an integers in comma seperated list");
             System.exit(0);
         }
 
@@ -67,7 +67,8 @@ public class Elevator {
         List<Integer> leftFloorsToVisit = new ArrayList<>(floorsToVisit);
         List<Integer> leftFloorsVisited = new ArrayList<>(floorsVisited);
         int leftFloor = leftFloorsToVisit.remove(currentIndex);
-        leftFloorsVisited.add(leftFloor);
+        if(leftFloor != currentFloor)
+            leftFloorsVisited.add(leftFloor);
         int leftPathDistance = Math.abs(currentFloor - leftFloor);
         leftPathDistance += calculateShortestPath(Math.max(currentIndex - 1, 0), leftFloor, leftFloorsToVisit, leftFloorsVisited);
 
@@ -76,7 +77,8 @@ public class Elevator {
             List<Integer> rightFloorsToVisit = new ArrayList<>(floorsToVisit);
             List<Integer> rightFloorsVisited = new ArrayList<>(floorsVisited);
             int rightFloor = rightFloorsToVisit.remove(currentIndex + 1);
-            rightFloorsVisited.add(rightFloor);
+            if (rightFloor != currentFloor)
+                rightFloorsVisited.add(rightFloor);
             int rightPathDistance = Math.abs(rightFloor - currentFloor);
             rightPathDistance += calculateShortestPath(currentIndex, rightFloor, rightFloorsToVisit, rightFloorsVisited);
             if (rightPathDistance < leftPathDistance) {
@@ -92,7 +94,8 @@ public class Elevator {
     public static boolean validateFloor(String value) {
         String valueToTry = value.trim();
         try {
-            return Integer.parseInt(valueToTry) > 0;
+            Integer.parseInt(valueToTry);
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
